@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Server
+name: Build and deploy Node.js project to Azure Function App - chura-api
 
 on:
   push:
@@ -12,7 +12,6 @@ on:
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '20.x' # set this to the node version to use (supports 8.x, 10.x, 12.x)
-  PACKAGE_PATH: 'start/server'
 
 jobs:
   build:
@@ -29,7 +28,7 @@ jobs:
       - name: 'Resolve Project Dependencies Using Npm'
         shell: bash
         run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/${{ env.PACKAGE_PATH }}'
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           npm install
           npm run build --if-present
           npm run test --if-present
@@ -65,11 +64,11 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C0C756FEAE8B4A38AA538DDA2EB8E3B4 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F1225BF69C4D44329450340805EACFA3 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A30627E661E84E83BD0FA2E7441DF86C }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_61A1EC147A9E43C89421BCF838ED8342 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_4C345CE1F1A342FC9348886C7134CA05 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_EE6F6D5C15984635BE8E2142C320AC5C }}
 
-      - name: 'Run Azure Functions Action+'
+      - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         id: fa
         with:
